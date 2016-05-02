@@ -68,6 +68,7 @@ DataFrame parseEDFevents(std::string fname) {
         time[curEvent] = (double)fd->fe.sttime;
         event[curEvent] = type;
         curEvent++;
+      }
     }
   }
   Rcpp::DataFrame EDF = Rcpp::DataFrame::create(
