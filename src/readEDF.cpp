@@ -43,6 +43,7 @@ DataFrame parseEDFevents(std::string fname) {
       /* Retrieve the type of the next data element in the EDF file */
       int type = edf_get_next_data(ed);
 
+      /* Added other types so that the data frame also includes fixations, saccades and blinks @SHuijser */
       if (type == MESSAGEEVENT || type == STARTFIX || type == ENDFIX) {
         fd = edf_get_float_data(ed);
         if(!fd->fe.message || fd->fe.message->len <= 0)
