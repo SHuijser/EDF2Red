@@ -23,7 +23,7 @@ DataFrame parseEDFevents(std::string fname) {
   if (ed != NULL) {
     /* Command to return the number of elements in the opened EDF file. */
     sampleCount = edf_get_element_count(ed);
-    printf('%i', sampleCount);
+    printf('%d', sampleCount);
   }
 
   // Create the lists which we're going to return as a data.frame:
