@@ -44,7 +44,7 @@ DataFrame parseEDFevents(std::string fname) {
       int type = edf_get_next_data(ed);
 
       /* Added other types so that the data frame also includes fixations, saccades and blinks @SHuijser */
-      if (type == MESSAGEEVENT || type == STARTFIX || type == ENDFIX) {
+      if (type == MESSAGEEVENT) {
         fd = edf_get_float_data(ed);
         if(!fd->fe.message || fd->fe.message->len <= 0)
         {
@@ -55,10 +55,19 @@ DataFrame parseEDFevents(std::string fname) {
         char * c = &(fd->fe.message->c);
         int	l = fd->fe.message->len;
         c[l] = 0;
-        event[curEvent] = type;
         msg[curEvent] = c;
         curEvent++;
       }
+      if (type == STARTFIX || type == ENDFIX) {
+        fd = edf_get_float_data(ed);
+        if(!fd->fe.message || fd->fe.message->len <= 0)
+        {
+          break;
+        }
+            
+        time[curEvent] = (double)fd->fe.sttime;
+        event[curEvent] = type;
+        curEvent++;
     }
   }
   Rcpp::DataFrame EDF = Rcpp::DataFrame::create(
