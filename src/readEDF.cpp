@@ -28,7 +28,7 @@ DataFrame parseEDFevents(std::string fname) {
   // Create the lists which we're going to return as a data.frame:
   NumericVector time(sampleCount);
   StringVector msg(sampleCount);
-  StringVector event(sampleCount);
+  StringVector eye_event(sampleCount);
 
   // Now, if possible, fill the lists:
   if (ed != NULL) {
@@ -66,7 +66,7 @@ DataFrame parseEDFevents(std::string fname) {
         }
             
         time[curEvent] = (double)fd->fe.sttime;
-        event[curEvent] = type;
+        eye_event[curEvent] = type;
         curEvent++;
       }
     }
@@ -74,7 +74,7 @@ DataFrame parseEDFevents(std::string fname) {
   Rcpp::DataFrame EDF = Rcpp::DataFrame::create(
     Rcpp::Named("time")=time,
     Rcpp::Named("msg")=msg,
-    Rcpp::Named("event")=event
+    Rcpp::Named("eye_event")=eye_event
   );
 
   return(EDF);
