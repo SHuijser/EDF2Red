@@ -43,7 +43,7 @@ DataFrame parseEDFevents(std::string fname) {
       /* Retrieve the type of the next data element in the EDF file */
       int type = edf_get_next_data(ed);
 
-      if (type == MESSAGEEVENT || type == STARTFIX || type = ENDFIX) {
+      if (type == MESSAGEEVENT || type == STARTFIX || type == ENDFIX) {
         fd = edf_get_float_data(ed);
         if(!fd->fe.message || fd->fe.message->len <= 0)
         {
