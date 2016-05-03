@@ -69,14 +69,14 @@ DataFrame parseEDFevents(std::string fname) {
         }
         */
         time[curEvent] = (double)fd->fe.sttime;
-        const char *sfix = "startfix";
+        char * sfix = "startfix";
         eye_event[curEvent] = sfix;
         curEvent++;
       }
       if (type == ENDFIX) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        const char *efix = "endfix";
+        char * efix = "endfix";
         eye_event[curEvent] = efix;
         curEvent++;
       }
@@ -85,14 +85,14 @@ DataFrame parseEDFevents(std::string fname) {
       if (type == STARTBLINK) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        const char *sblink = "startblink";
+        char * sblink = "startblink";
         eye_event[curEvent] = sblink;
         curEvent++;
       }
       if (type == ENDBLINK) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        const char *eblink = "endblink";
+        char * eblink = "endblink";
         eye_event[curEvent] = eblink;
         curEvent++;
       }
@@ -101,14 +101,14 @@ DataFrame parseEDFevents(std::string fname) {
       if (type == STARTSACC) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        const char *ssac = "startsacc";
+        char * ssac = "startsacc";
         eye_event[curEvent] = ssac;
         curEvent++;
       }
       if (type == ENDSACC) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        const char *esac = "endsacc";
+        char * esac = "endsacc";
         eye_event[curEvent] = esac;
         curEvent++;
       }
