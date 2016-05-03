@@ -71,6 +71,41 @@ DataFrame parseEDFevents(std::string fname) {
         eye_event[curEvent] = a;
         curEvent++;
       }
+      if (type == ENDFIX) {
+        fd = edf_get_float_data(ed);
+        time[curEvent] = (double)fd->fe.sttime;
+        const char *a = "endfix";
+        eye_event[curEvent] = a;
+        curEvent++;
+      }
+      if (type == STARTBLINK {
+        fd = edf_get_float_data(ed);
+        time[curEvent] = (double)fd->fe.sttime;
+        const char *a = "startblink";
+        eye_event[curEvent] = a;
+        curEvent++;
+      }
+      if (type == ENDBLINK {
+        fd = edf_get_float_data(ed);
+        time[curEvent] = (double)fd->fe.sttime;
+        const char *a = "endblink";
+        eye_event[curEvent] = a;
+        curEvent++;
+      }
+      if (type == STARTSACC {
+        fd = edf_get_float_data(ed);
+        time[curEvent] = (double)fd->fe.sttime;
+        const char *a = "startsacc";
+        eye_event[curEvent] = a;
+        curEvent++;
+      }
+      if (type == ENDSACC {
+        fd = edf_get_float_data(ed);
+        time[curEvent] = (double)fd->fe.sttime;
+        const char *a = "endsacc";
+        eye_event[curEvent] = a;
+        curEvent++;
+      }
     }
   }
   Rcpp::DataFrame EDF = Rcpp::DataFrame::create(
