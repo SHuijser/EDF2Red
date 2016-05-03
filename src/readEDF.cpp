@@ -60,13 +60,13 @@ DataFrame parseEDFevents(std::string fname) {
         curEvent++;
       }
       if (type == STARTFIX) {
-        fd = edf_get_float_data(ed);
-        if(!fd->fe.message || fd->fe.message->len <= 0)
+        f_fix = edf_get_float_data(ed);
+        if(!f_fix->fe.message || f_fix->fe.message->len <= 0)
         {
           break;
         }
             
-        time[curEvent] = (double)fd->fe.sttime;
+        time[curEvent] = (double)f_fix->fe.sttime;
         const char *a = "startfix";
         eye_event[curEvent] = a;
         curEvent++;
