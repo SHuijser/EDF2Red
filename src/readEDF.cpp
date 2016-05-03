@@ -67,7 +67,7 @@ DataFrame parseEDFevents(std::string fname) {
         }
             
         time[curEvent] = (double)fd->fe.sttime;
-        const char a = "startfix";
+        const char *a = "startfix";
         eye_event[curEvent] = a;
         curEvent++;
       }
