@@ -28,7 +28,7 @@ DataFrame parseEDFevents(std::string fname) {
   // Create the lists which we're going to return as a data.frame:
   NumericVector time(sampleCount);
   StringVector msg(sampleCount);
-  StringVector eye_event(sampleCount);
+  //StringVector eye_event(sampleCount);
 
   // Now, if possible, fill the lists:
   if (ed != NULL) {
@@ -69,7 +69,7 @@ DataFrame parseEDFevents(std::string fname) {
         }
         */
         time[curEvent] = (double)fd->fe.sttime;
-        char * sfix = "startfix";
+        const char * sfix = "startfix";
         //eye_event[curEvent] = sfix;
           msg[curEvent] = sfix;
         curEvent++;
@@ -77,8 +77,8 @@ DataFrame parseEDFevents(std::string fname) {
       if (type == ENDFIX) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        char * efix = "endfix";
-        eye_event[curEvent] = efix;
+        const char * efix = "endfix";
+        msg[curEvent] = efix;
         curEvent++;
       }
         
@@ -86,15 +86,15 @@ DataFrame parseEDFevents(std::string fname) {
       if (type == STARTBLINK) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        char * sblink = "startblink";
-        eye_event[curEvent] = sblink;
+        const char * sblink = "startblink";
+        msg[curEvent] = sblink;
         curEvent++;
       }
       if (type == ENDBLINK) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        char * eblink = "endblink";
-        eye_event[curEvent] = eblink;
+        const char * eblink = "endblink";
+        msg[curEvent] = eblink;
         curEvent++;
       }
         
@@ -102,23 +102,23 @@ DataFrame parseEDFevents(std::string fname) {
       if (type == STARTSACC) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        char * ssac = "startsacc";
-        eye_event[curEvent] = ssac;
+        const char * ssac = "startsacc";
+        msg[curEvent] = ssac;
         curEvent++;
       }
       if (type == ENDSACC) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
-        char * esac = "endsacc";
-        eye_event[curEvent] = esac;
+        const char * esac = "endsacc";
+        msg[curEvent] = esac;
         curEvent++;
       }
     }
   }
   Rcpp::DataFrame EDF = Rcpp::DataFrame::create(
     Rcpp::Named("time")=time,
-    Rcpp::Named("msg")=msg,
-    Rcpp::Named("eye_event")=eye_event
+    Rcpp::Named("msg")=msg
+    //Rcpp::Named("eye_event")=eye_event
   );
 
   return(EDF);
