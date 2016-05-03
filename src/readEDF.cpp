@@ -70,7 +70,8 @@ DataFrame parseEDFevents(std::string fname) {
         */
         time[curEvent] = (double)fd->fe.sttime;
         char * sfix = "startfix";
-        eye_event[curEvent] = sfix;
+        //eye_event[curEvent] = sfix;
+          msg[curEvent] = sfix;
         curEvent++;
       }
       if (type == ENDFIX) {
