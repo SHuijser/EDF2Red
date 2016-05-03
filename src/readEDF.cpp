@@ -59,7 +59,7 @@ DataFrame parseEDFevents(std::string fname) {
         msg[curEvent] = c;
         curEvent++;
       }
-      if (type == STARTFIX || type == ENDFIX) {
+      if (type == STARTFIX) {
         fd = edf_get_float_data(ed);
         if(!fd->fe.message || fd->fe.message->len <= 0)
         {
