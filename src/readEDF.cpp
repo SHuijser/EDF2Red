@@ -23,7 +23,6 @@ DataFrame parseEDFevents(std::string fname) {
   if (ed != NULL) {
     /* Command to return the number of elements in the opened EDF file. */
     sampleCount = edf_get_element_count(ed);
-    std::cout << sampleCount;
   }
 
   // Create the lists which we're going to return as a data.frame:
@@ -45,6 +44,7 @@ DataFrame parseEDFevents(std::string fname) {
       int type = edf_get_next_data(ed);
 
       /* Added other types so that the data frame also includes fixations, saccades and blinks @SHuijser */
+      /* EVENT MESSAGES */
       if (type == MESSAGEEVENT) {
         fd = edf_get_float_data(ed);
         if(!fd->fe.message || fd->fe.message->len <= 0)
@@ -59,6 +59,8 @@ DataFrame parseEDFevents(std::string fname) {
         msg[curEvent] = c;
         curEvent++;
       }
+        
+      /* FIXATION MESSAGES */
       if (type == STARTFIX) {
         fd = edf_get_float_data(ed);
         /*if(!fd->fe.message || fd->fe.message->len <= 0)
@@ -78,28 +80,32 @@ DataFrame parseEDFevents(std::string fname) {
         eye_event[curEvent] = efix;
         curEvent++;
       }
-      if (type == STARTBLINK {
+        
+      /* BLINK MESSAGES */
+      if (type == STARTBLINK) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
         const char *sblink = "startblink";
         eye_event[curEvent] = sblink;
         curEvent++;
       }
-      if (type == ENDBLINK {
+      if (type == ENDBLINK) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
         const char *eblink = "endblink";
         eye_event[curEvent] = eblink;
         curEvent++;
       }
-      if (type == STARTSACC {
+        
+      /* SACCADE MESSAGES */
+      if (type == STARTSACC) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
         const char *ssac = "startsacc";
         eye_event[curEvent] = ssac;
         curEvent++;
       }
-      if (type == ENDSACC {
+      if (type == ENDSACC) {
         fd = edf_get_float_data(ed);
         time[curEvent] = (double)fd->fe.sttime;
         const char *esac = "endsacc";
