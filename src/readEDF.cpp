@@ -71,12 +71,12 @@ DataFrame parseEDFevents(std::string fname) {
         time[curEvent] = (double)fd->fe.sttime;
         const char * sfix = "startfix";
         //eye_event[curEvent] = sfix;
-          msg[curEvent] = sfix;
+        msg[curEvent] = sfix;
         curEvent++;
       }
       if (type == ENDFIX) {
         fd = edf_get_float_data(ed);
-        time[curEvent] = (double)fd->fe.sttime;
+        time[curEvent] = (double)fd->fe.entime;
         const char * efix = "endfix";
         msg[curEvent] = efix;
         curEvent++;
@@ -92,7 +92,7 @@ DataFrame parseEDFevents(std::string fname) {
       }
       if (type == ENDBLINK) {
         fd = edf_get_float_data(ed);
-        time[curEvent] = (double)fd->fe.sttime;
+        time[curEvent] = (double)fd->fe.entime;
         const char * eblink = "endblink";
         msg[curEvent] = eblink;
         curEvent++;
@@ -108,7 +108,7 @@ DataFrame parseEDFevents(std::string fname) {
       }
       if (type == ENDSACC) {
         fd = edf_get_float_data(ed);
-        time[curEvent] = (double)fd->fe.sttime;
+        time[curEvent] = (double)fd->fe.entime;
         const char * esac = "endsacc";
         msg[curEvent] = esac;
         curEvent++;
